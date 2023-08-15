@@ -1,4 +1,4 @@
-import { withSessionSsr } from "./WithSession";
+import { withSessionSsr } from "./withSession";
 
 const WithAuthAdmin = (gssp) =>
   withSessionSsr(async (context) => {

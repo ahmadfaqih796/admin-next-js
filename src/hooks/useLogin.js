@@ -29,7 +29,7 @@ const useLogin = () => {
       password: password.value,
       strategy: "local",
     };
-
+    console.log("masuk mas", data);
     try {
       const { data: res } = await Axios.post("/api/login", data);
       setColor("success");
@@ -53,11 +53,11 @@ const useLogin = () => {
         return router.replace("/superadmin/dashboard");
       }
 
-      handleLoading(false);
-      setColor("error");
-      setOpen(true);
-      setMessage("Unauthorized");
-      await Axios.post("/api/logout");
+      // handleLoading(false);
+      // setColor("error");
+      // setOpen(true);
+      // setMessage("Unauthorized");
+      // await Axios.post("/api/logout");
       return;
     } catch (error) {
       handleLoading(false);

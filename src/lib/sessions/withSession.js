@@ -1,8 +1,8 @@
 import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
 
 const sessionOptions = {
-  password: process.env.SESSION_PASSWORD,
-  cookieName: process.env.SESSION_COOKIE_NAME,
+  password: "qPatLEX16rTYBKQuaC1iyZk1RGhyV9q6np",
+  cookieName: "gacor_web",
 };
 
 export function withSessionRoute(handler) {

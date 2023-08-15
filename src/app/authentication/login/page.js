@@ -1,18 +1,20 @@
 "use client";
-import * as React from "react";
+import useLogin from "@/hooks/useLogin";
+import CloseIcon from "@mui/icons-material/Close";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Alert, CircularProgress, Collapse, IconButton } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 function Copyright(props) {
   return (
@@ -37,6 +39,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login() {
+  const { loading, handleLogin, color, message, open, setOpen } = useLogin();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -83,10 +86,31 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            <Collapse in={open}>
+              <Alert
+                variant="filled"
+                severity={color || "info"}
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+                sx={{ mb: 2, mt: 2, width: "100%" }}
+              >
+                <Typography color={"white"}>{message}</Typography>
+              </Alert>
+            </Collapse>
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              onSubmit={(e) => handleLogin(e)}
               sx={{ mt: 1 }}
             >
               <TextField
@@ -114,12 +138,13 @@ export default function Login() {
                 label="Remember me"
               />
               <Button
+                variant="contained"
+                disabled={loading}
+                size="large"
                 type="submit"
                 fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                {loading ? <CircularProgress size={20} /> : "Masuk"}
               </Button>
               <Grid container>
                 <Grid item xs>

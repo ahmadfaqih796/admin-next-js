@@ -40,15 +40,6 @@ const defaultTheme = createTheme();
 
 export default function Login() {
   const { loading, handleLogin, color, message, open, setOpen } = useLogin();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
